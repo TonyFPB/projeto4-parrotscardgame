@@ -146,21 +146,23 @@ function naoEsconder(){
 }
 function jogar_de_novo(){
     if(vitoria === quantasCartas){
-        resetar=prompt('Quer jogar de novo?')
         ok()
     }
     
 }
 function ok(){
-    while(resetar !== 'sim' || resetar !== 'nao'){
-        resetar=prompt('Desculpa. Nao entendi. Quer jogar de novo?(Digite sim ou nao)')
+    while(resetar !== 'sim'){
+        resetar =prompt('Quer jogar de novo? Digite sim ou nao')
+        if(resetar ==='nao'){
+            break
+        }
     }
     if (resetar === 'sim'){
         quantasCartas=0
         paraJogar=[]
         comecandoAJogar()
     }
-    else{
+    else if(resetar === 'nao'){
         const final =document.querySelector('ul')
         final.innerHTML='Obrigado por jogar'
     }
