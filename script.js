@@ -3,13 +3,15 @@ const gifs=['bobross','bobross','explody','explody','fiesta','fiesta','metal','m
 let paraJogar=[]
 let quantasCartas=0;
 let qtd_cartas_viradas=0;
+let vitoria=0;
+let resetar='';
 
 function comecandoAJogar(){
     //Funcao que pergunta a quantidade de cartas ja embaralhando elas em uma lista
     quantasCartas=0
     paraJogar=[]
     while(quantasCartas < 4 || quantasCartas%2 !== 0 || quantasCartas>14){
-        quantasCartas=prompt('quantas cartas?')
+        quantasCartas=Number(prompt('quantas cartas?'))
         console.log(quantasCartas)
     }
     for(let i=0;i<quantasCartas;i++){
@@ -18,6 +20,7 @@ function comecandoAJogar(){
     paraJogar.sort(comparador)
     colocandoCartas()
 }
+
 function comparador() {
     //Funcao aux 
 	return Math.random() - 0.5; 
@@ -27,12 +30,15 @@ function comparador() {
 function colocandoCartas(){
     //Funcao que imprime as cartas no DOM
     console.log(paraJogar)
+    vitoria=0
+    resetar=''
     const listaDeCartas = document.querySelector('ul')
     listaDeCartas.innerHTML
     if(quantasCartas !== 0){
         listaDeCartas.innerHTML=''
         for(let i=0; i<quantasCartas;i++){
             listaDeCartas.innerHTML+=`<li>
+            <div class="naoToqueCarta oculta escondida"></div>
             <div class="carta" onclick="virarCarta(this)">
                 <div class="frente face">
                     <img src="img-game/front.png"/>
@@ -68,8 +74,10 @@ function virarCarta(C){
 
         const naoTocar=document.querySelector('.naoToque')
         naoTocar.classList.remove('escondida')
-        setTimeout(naoEsconder,2000)
+        setTimeout(naoEsconder,1100)
+
         verificar(carta1,carta2)
+
         qtd_cartas_viradas=0
         console.log(carta1)
         console.log(carta2)
@@ -97,6 +105,7 @@ function verificar(a,b){
     //carta1 carta2
     //cartaDiv1 cartaDiv2
     if(a===b){
+        vitoria+=2
         cartaDiv1.classList.add('virar')
         const lista1=cartaDiv1.children
         lista1[0].classList.add('oculta')
@@ -106,11 +115,20 @@ function verificar(a,b){
         const lista2=cartaDiv2.children
         lista2[0].classList.add('oculta')
         lista2[1].classList.remove('oculta')
+        
+        const liPai1=cartaDiv1.parentNode
+        liPai1.children[0].classList.remove('escondida')
+
+        const liPai2=cartaDiv2.parentNode
+        liPai2.children[0].classList.remove('escondida')
+    
     }
     else if(a!==b){
         setTimeout(virarCartaDeCostas,1000,cartaDiv1)
         setTimeout(virarCartaDeCostas,1000,cartaDiv2)
     }
+    console.log(vitoria === quantasCartas)
+    setTimeout(jogar_de_novo,1500)
 
 }
 function virarCartaDeCostas(divisao){
@@ -126,5 +144,25 @@ function naoEsconder(){
     const naoTocar=document.querySelector('.naoToque')
     naoTocar.classList.add('escondida')
 }
-
-comecandoAJogar()
+function jogar_de_novo(){
+    if(vitoria === quantasCartas){
+        resetar=prompt('Quer jogar de novo?')
+        ok()
+    }
+    
+}
+function ok(){
+    while(resetar !== 'sim' || resetar !== 'nao'){
+        resetar=prompt('Desculpa. Nao entendi. Quer jogar de novo?(Digite sim ou nao)')
+    }
+    if (resetar === 'sim'){
+        quantasCartas=0
+        paraJogar=[]
+        comecandoAJogar()
+    }
+    else{
+        const final =document.querySelector('ul')
+        final.innerHTML='Obrigado por jogar'
+    }
+}
+setTimeout(comecandoAJogar,500)
