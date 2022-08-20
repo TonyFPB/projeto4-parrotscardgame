@@ -4,6 +4,28 @@ body{
     width: 100%;
     background-color: #EEF9BF;
 }
+.tempo{
+    position: fixed;
+    top: 20px;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0,0.5);
+    border-bottom-left-radius: 5px;
+    border-top-left-radius: 5px;
+}
+.jogadas{
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 40px;
+    right: 0;
+    background-color: rgba(0, 0, 0,0.5);
+    border-bottom-left-radius: 5px;
+    border-top-left-radius: 5px;
+}
 .header{
     width: 541px;
     height: 63px;
@@ -89,7 +111,6 @@ img{
 }
 .oculta{
     opacity: 0;
-    background-color: blue;
 }
 .escondida{
     display: none;

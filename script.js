@@ -5,13 +5,16 @@ let quantasCartas=0;
 let qtd_cartas_viradas=0;
 let vitoria=0;
 let resetar='';
+let Jogadas=0;
+let Tempo=0;
+let parador;
 
 function comecandoAJogar(){
     //Funcao que pergunta a quantidade de cartas ja embaralhando elas em uma lista
     quantasCartas=0
     paraJogar=[]
     while(quantasCartas < 4 || quantasCartas%2 !== 0 || quantasCartas>14){
-        quantasCartas=Number(prompt('quantas cartas?'))
+        quantasCartas=Number(prompt('Quantas cartas?'))
         console.log(quantasCartas)
     }
     for(let i=0;i<quantasCartas;i++){
@@ -19,6 +22,7 @@ function comecandoAJogar(){
     }
     paraJogar.sort(comparador)
     colocandoCartas()
+    parador=setInterval(atualizaTempo,1000)
 }
 
 function comparador() {
@@ -31,7 +35,8 @@ function colocandoCartas(){
     //Funcao que imprime as cartas no DOM
     vitoria=0
     resetar=''
-
+    Tempo=0
+    Jogadas=0
     const listaDeCartas = document.querySelector('ul')
 
     if(quantasCartas !== 0){
@@ -61,6 +66,7 @@ let carta2='';
 let cartaDiv2;
 
 function virarCarta(C){
+    atualizaJogadas()
     //Funcao para virar as cartas
     qtd_cartas_viradas++  //1
     if(qtd_cartas_viradas === 2){
@@ -128,7 +134,7 @@ function verificar(a,b){
         setTimeout(virarCartaDeCostas,1000,cartaDiv2)
     }
 
-    setTimeout(jogar_de_novo,1500)
+    setTimeout(jogar_de_novo,500)
 
 }
 function virarCartaDeCostas(divisao){
@@ -146,6 +152,7 @@ function naoEsconder(){
 }
 function jogar_de_novo(){
     if(vitoria === quantasCartas){
+        clearInterval(parador)
         resetar_ou_nao()
     }
     
@@ -153,7 +160,7 @@ function jogar_de_novo(){
 function resetar_ou_nao(){
     //Funcao que reseta ou nao o jogo dependendo da resposta no prompt
     while(resetar !== 'sim'){
-        resetar = prompt('Quer jogar de novo? Digite sim ou nao')
+        resetar = prompt('Quer jogar de novo? Digite sim ou não.')
         if(resetar ==='não'){
             break
         }
@@ -161,11 +168,23 @@ function resetar_ou_nao(){
     if (resetar === 'sim'){
         quantasCartas=0
         paraJogar=[]
+        Jogadas=0
+        document.querySelector('.jogadas').innerHTML=`Jogadas: ${Jogadas}`
         comecandoAJogar()
     }
     else if(resetar === 'não'){
         const final =document.querySelector('ul')
         final.innerHTML='<h1>Obrigado por jogar!</h1>'
     }
+}
+
+function atualizaTempo(){
+    Tempo+=1;
+    document.querySelector('.tempo').innerHTML=`Tempo: ${Tempo}`
+}
+
+function atualizaJogadas(){
+    Jogadas+=1
+    document.querySelector('.jogadas').innerHTML=`Jogadas: ${Jogadas}`
 }
 setTimeout(comecandoAJogar,500)
