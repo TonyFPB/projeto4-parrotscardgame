@@ -29,11 +29,11 @@ function comparador() {
 
 function colocandoCartas(){
     //Funcao que imprime as cartas no DOM
-    console.log(paraJogar)
     vitoria=0
     resetar=''
+
     const listaDeCartas = document.querySelector('ul')
-    listaDeCartas.innerHTML
+
     if(quantasCartas !== 0){
         listaDeCartas.innerHTML=''
         for(let i=0; i<quantasCartas;i++){
@@ -127,7 +127,7 @@ function verificar(a,b){
         setTimeout(virarCartaDeCostas,1000,cartaDiv1)
         setTimeout(virarCartaDeCostas,1000,cartaDiv2)
     }
-    console.log(vitoria === quantasCartas)
+
     setTimeout(jogar_de_novo,1500)
 
 }
@@ -146,14 +146,15 @@ function naoEsconder(){
 }
 function jogar_de_novo(){
     if(vitoria === quantasCartas){
-        ok()
+        resetar_ou_nao()
     }
     
 }
-function ok(){
+function resetar_ou_nao(){
+    //Funcao que reseta ou nao o jogo dependendo da resposta no prompt
     while(resetar !== 'sim'){
-        resetar =prompt('Quer jogar de novo? Digite sim ou nao')
-        if(resetar ==='nao'){
+        resetar = prompt('Quer jogar de novo? Digite sim ou nao')
+        if(resetar ==='não'){
             break
         }
     }
@@ -162,9 +163,9 @@ function ok(){
         paraJogar=[]
         comecandoAJogar()
     }
-    else if(resetar === 'nao'){
+    else if(resetar === 'não'){
         const final =document.querySelector('ul')
-        final.innerHTML='Obrigado por jogar'
+        final.innerHTML='<h1>Obrigado por jogar!</h1>'
     }
 }
 setTimeout(comecandoAJogar,500)

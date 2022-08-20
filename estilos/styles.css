@@ -21,6 +21,12 @@ body{
     align-items: center;
     
 }
+h1{
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+    font-size: 100px;
+    color: #75B79E;;
+}
 ul{
     width: 872px;
     height: 326px;
@@ -62,12 +68,11 @@ img{
 }
 
 .costas{
-    background-color: blueviolet;
     position: absolute;
     
 }
 .frente{
-    background-color: red;
+    z-index: 1;
     position: absolute;
     
 }
