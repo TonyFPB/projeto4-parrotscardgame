@@ -4,6 +4,37 @@ body{
     width: 100%;
     background-color: #EEF9BF;
 }
+button{
+    position: fixed;
+    top: 5px;
+    left: 5px;    
+    width: 30px;
+    height: 30px;
+    background-color: #e8f7a8;
+    border-radius: 4px;
+    border-color: #6eeb91;
+    border-style:groove;
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+}
+
+.pause{
+    top: 40px;
+}
+
+.raise{
+    top: 80px;
+}
+
+.decrease{
+    top:120px
+}
+
+ion-icon{
+    color: rgb(85, 173, 85);
+}
+
 .tempo{
     position: fixed;
     top: 20px;

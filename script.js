@@ -46,10 +46,10 @@ function colocandoCartas(){
             <div class="naoToqueCarta oculta escondida"></div>
             <div class="carta" onclick="virarCarta(this)">
                 <div class="frente face">
-                    <img src="img-game/front.png"/>
+                    <img src="img-game/front.png" alt="Imagem das costas da carta"/>
                 </div>
                 <div class="costas face oculta">
-                    <img src="img-game/${paraJogar[i]}parrot.gif" />
+                    <img src="img-game/${paraJogar[i]}parrot.gif" alt="Gif da frente da carta"/>
                 </div>
             </div>
         </li>`
@@ -153,6 +153,7 @@ function naoEsconder(){
 function jogar_de_novo(){
     if(vitoria === quantasCartas){
         clearInterval(parador)
+        alert(`PARABENS!!!!!! Você ganhou o jogo em ${Tempo} segundos e ${Jogadas} jogadas!`)
         resetar_ou_nao()
     }
     
@@ -169,7 +170,7 @@ function resetar_ou_nao(){
         quantasCartas=0
         paraJogar=[]
         Jogadas=0
-        document.querySelector('.jogadas').innerHTML=`Jogadas: ${Jogadas}`
+        document.querySelector('.jogadas').innerHTML=`Jogadas: ${Jogadas} `
         comecandoAJogar()
     }
     else if(resetar === 'não'){
@@ -180,11 +181,33 @@ function resetar_ou_nao(){
 
 function atualizaTempo(){
     Tempo+=1;
-    document.querySelector('.tempo').innerHTML=`Tempo: ${Tempo}`
+    document.querySelector('.tempo').innerHTML=`Tempo: ${Tempo} `
 }
 
 function atualizaJogadas(){
     Jogadas+=1
-    document.querySelector('.jogadas').innerHTML=`Jogadas: ${Jogadas}`
+    document.querySelector('.jogadas').innerHTML=`Jogadas: ${Jogadas} `
+}
+
+function musica(classe){
+    const audio = document.querySelector('audio')
+    const play =document.querySelector('.play')
+    const pause=document.querySelector('.pause')
+    const raise =document.querySelector('.raise')
+    const lower=document.querySelector('.decrease')
+    if(classe === play){
+        audio.play()
+    }
+    else if(classe === pause){
+        audio.pause()
+    }
+    else if(classe === raise && audio.volume <= 0.9){
+        audio.volume+=0.1
+        console.log(audio.volume)
+    }
+    else if(classe === lower && audio.volume >= 0.1){
+        audio.volume-=0.1
+        console.log(audio.volume)
+    }
 }
 setTimeout(comecandoAJogar,500)

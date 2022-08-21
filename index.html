@@ -12,6 +12,10 @@
 </head>
 <body>
     <div class="container">
+        <button class="play" onclick="musica(this)"><ion-icon name="play"></ion-icon></button>
+        <button class="pause" onclick="musica(this)"><ion-icon name="pause"></ion-icon></button>
+        <button class="raise" onclick="musica(this)"><ion-icon name="caret-up-circle"></ion-icon></button>
+        <button class="decrease" onclick="musica(this)"><ion-icon name="caret-down-circle"></ion-icon></button>
         <div class="tempo">
             Tempo: 0
         </div>
@@ -29,7 +33,9 @@
             
         </ul>
     </div>
+    <audio src="audio/Sleepermane-Lumia.mp3" loop></audio>
     <div class="naoToque oculta escondida"></div>
     <script src="script.js"></script>
+    <script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
 </body>
 </html>
