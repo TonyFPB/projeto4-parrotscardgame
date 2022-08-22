@@ -15,7 +15,6 @@ function comecandoAJogar(){
     paraJogar=[]
     while(quantasCartas < 4 || quantasCartas%2 !== 0 || quantasCartas>14){
         quantasCartas=Number(prompt('Quantas cartas?'))
-        console.log(quantasCartas)
     }
     for(let i=0;i<quantasCartas;i++){
         paraJogar.push(gifs[i])
@@ -85,9 +84,6 @@ function virarCarta(C){
         verificar(carta1,carta2)
 
         qtd_cartas_viradas=0
-        console.log(carta1)
-        console.log(carta2)
-        console.log(carta1 === carta2)
 
         carta1='1'
         carta2='2'
@@ -101,6 +97,9 @@ function virarCarta(C){
     const lista=C.children
     lista[0].classList.add('oculta')
     lista[1].classList.remove('oculta')
+
+    const liPai1=C.parentNode
+    liPai1.children[0].classList.remove('escondida')
 
     }
 }
@@ -143,6 +142,10 @@ function virarCartaDeCostas(divisao){
     const lista=divisao.children
     lista[0].classList.remove('oculta')
     lista[1].classList.add('oculta')
+    const liPai=divisao.parentNode
+    if(liPai.children[0].classList.length < 3){
+        liPai.children[0].classList.add('escondida')
+    }
 }
 
 function naoEsconder(){
@@ -202,12 +205,10 @@ function musica(classe){
         audio.pause()
     }
     else if(classe === raise && audio.volume <= 0.9){
-        audio.volume+=0.1
-        console.log(audio.volume)
+        audio.volume+=0.1  
     }
     else if(classe === lower && audio.volume >= 0.1){
         audio.volume-=0.1
-        console.log(audio.volume)
     }
 }
 setTimeout(comecandoAJogar,500)
